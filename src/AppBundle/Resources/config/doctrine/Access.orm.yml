@@ -1,0 +1,21 @@
+AppBundle\Entity\Access:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\AccessRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        type:
+            type: integer
+    manyToMany:
+        role:
+            targetEntity: AppBundle\Entity\Role
+            mappedBy: access
+        projects:
+            targetEntity: AppBundle\Entity\Project
+            mappedBy: access
+    lifecycleCallbacks: {  }
