@@ -1,0 +1,8 @@
+app.index:
+    path:     /
+    defaults: { _controller: AppBundle:Default:index }
+
+#auth
+app.auth:
+    resource: 'routes/auth.yml'
+    prefix:   /

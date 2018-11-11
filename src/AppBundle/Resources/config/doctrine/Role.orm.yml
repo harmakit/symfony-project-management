@@ -15,12 +15,12 @@ AppBundle\Entity\Role:
     oneToMany:
         creator:
             targetEntity: AppBundle\Entity\User
-            mappedBy: role
+            mappedBy: createdRoles
     manyToMany:
         access:
             targetEntity: AppBundle\Entity\Access
             inversedBy: role
         users:
             targetEntity: AppBundle\Entity\User
-            mappedBy: roles
+            mappedBy: accessRoles
     lifecycleCallbacks: {  }

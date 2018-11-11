@@ -8,7 +8,7 @@ namespace AppBundle\Entity;
 class Project
 {
     /**
-     * @var int
+     * @var integer
      */
     private $id;
 
@@ -22,11 +22,33 @@ class Project
      */
     private $content;
 
+    /**
+     * @var \DateTime
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     */
+    private $updatedAt;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $access;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->access = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -80,16 +102,6 @@ class Project
     {
         return $this->content;
     }
-    /**
-     * @var \DateTime
-     */
-    private $created_at;
-
-    /**
-     * @var \DateTime
-     */
-    private $updated_at;
-
 
     /**
      * Set createdAt
@@ -100,7 +112,7 @@ class Project
      */
     public function setCreatedAt($createdAt)
     {
-        $this->created_at = $createdAt;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
@@ -112,7 +124,7 @@ class Project
      */
     public function getCreatedAt()
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     /**
@@ -124,7 +136,7 @@ class Project
      */
     public function setUpdatedAt($updatedAt)
     {
-        $this->updated_at = $updatedAt;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
@@ -136,85 +148,8 @@ class Project
      */
     public function getUpdatedAt()
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $role;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->role = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add role
-     *
-     * @param \AppBundle\Entity\Role $role
-     *
-     * @return Project
-     */
-    public function addRole(\AppBundle\Entity\Role $role)
-    {
-        $this->role[] = $role;
-
-        return $this;
-    }
-
-    /**
-     * Remove role
-     *
-     * @param \AppBundle\Entity\Role $role
-     */
-    public function removeRole(\AppBundle\Entity\Role $role)
-    {
-        $this->role->removeElement($role);
-    }
-
-    /**
-     * Get role
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getRole()
-    {
-        return $this->role;
-    }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $roles;
-
-
-    /**
-     * Get roles
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getRoles()
-    {
-        return $this->roles;
-    }
-    /**
-     * @var \DateTime
-     */
-    private $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    private $updatedAt;
-
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $access;
-
 
     /**
      * Add access

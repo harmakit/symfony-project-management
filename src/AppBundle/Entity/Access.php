@@ -12,19 +12,10 @@ class Access
     const READ = 2;
 
     /**
-     * @var int
+     * @var integer
      */
     private $id;
 
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
     /**
      * @var integer
      */
@@ -47,6 +38,16 @@ class Access
     {
         $this->role = new \Doctrine\Common\Collections\ArrayCollection();
         $this->projects = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**

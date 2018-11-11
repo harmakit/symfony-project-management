@@ -13,19 +13,20 @@ AppBundle\Entity\User:
             type: string
             length: 255
             unique: true
-        password:
+        email:
             type: string
             length: 255
-        salt:
+            unique: true
+        password:
             type: string
             length: 255
     manyToOne:
         createdRoles:
             column: created_roles
             targetEntity: AppBundle\Entity\Role
-            inversedBy: owner
+            inversedBy: creator
     manyToMany:
-        roles:
+        accessRoles:
             targetEntity: AppBundle\Entity\Role
             inversedBy: users
     lifecycleCallbacks: {  }

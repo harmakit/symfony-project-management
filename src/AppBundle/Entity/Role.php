@@ -5,137 +5,19 @@ namespace AppBundle\Entity;
 /**
  * Role
  */
-class Role
+class Role extends \Symfony\Component\Security\Core\Role\Role
 {
+   
     /**
-     * @var int
+     * @var integer
      */
     private $id;
 
     /**
-     * @var int
+     * @var string
      */
-    private $accessType;
+    private $name;
 
-
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set accessType
-     *
-     * @param integer $accessType
-     *
-     * @return Role
-     */
-    public function setAccessType($accessType)
-    {
-        $this->accessType = $accessType;
-
-        return $this;
-    }
-
-    /**
-     * Get accessType
-     *
-     * @return int
-     */
-    public function getAccessType()
-    {
-        return $this->accessType;
-    }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $project;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->project = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add project
-     *
-     * @param \AppBundle\Entity\Project $project
-     *
-     * @return Role
-     */
-    public function addProject(\AppBundle\Entity\Project $project)
-    {
-        $this->project[] = $project;
-
-        return $this;
-    }
-
-    /**
-     * Remove project
-     *
-     * @param \AppBundle\Entity\Project $project
-     */
-    public function removeProject(\AppBundle\Entity\Project $project)
-    {
-        $this->project->removeElement($project);
-    }
-
-    /**
-     * Get project
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getProject()
-    {
-        return $this->project;
-    }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $user;
-
-
-    /**
-     * Add user
-     *
-     * @param \AppBundle\Entity\User $user
-     *
-     * @return Role
-     */
-    public function addUser(\AppBundle\Entity\User $user)
-    {
-        $this->user[] = $user;
-
-        return $this;
-    }
-
-    /**
-     * Remove user
-     *
-     * @param \AppBundle\Entity\User $user
-     */
-    public function removeUser(\AppBundle\Entity\User $user)
-    {
-        $this->user->removeElement($user);
-    }
-
-    /**
-     * Get user
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
@@ -144,13 +26,47 @@ class Role
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $projects;
+    private $access;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
     private $users;
 
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Role
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 
     /**
      * Add creator
@@ -187,60 +103,6 @@ class Role
     }
 
     /**
-     * Get projects
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getProjects()
-    {
-        return $this->projects;
-    }
-
-    /**
-     * Get users
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUsers()
-    {
-        return $this->users;
-    }
-    /**
-     * @var string
-     */
-    private $name;
-
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Role
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $access;
-
-
-    /**
      * Add access
      *
      * @param \AppBundle\Entity\Access $access
@@ -272,5 +134,39 @@ class Role
     public function getAccess()
     {
         return $this->access;
+    }
+
+    /**
+     * Add user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Role
+     */
+    public function addUser(\AppBundle\Entity\User $user)
+    {
+        $this->users[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \AppBundle\Entity\User $user
+     */
+    public function removeUser(\AppBundle\Entity\User $user)
+    {
+        $this->users->removeElement($user);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }
