@@ -9,10 +9,12 @@ class DefaultController extends Controller
 {
     public function indexAction(Request $request)
     {
-        $user = $this->getUser();
-
-        if (!$user) {
+        if (!$this->isGranted('ROLE_USER')) {
             return $this->redirectToRoute('app.auth.login');
+        }
+
+        if ($this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app.admin.index');
         }
 
         return $this->redirectToRoute('app.workbench.index');

@@ -12,14 +12,15 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class WorkbenchController extends Controller
+class AdminController extends Controller
 {
     public function indexAction(Request $request)
     {
+        $user = $this->getUser();
         return $this->render(
-            'workbench/index.html.twig',
+            '/admin/index.html.twig',
             [
-                'projects' => 'projects'
+                'user' => $user
             ]
         );
     }
