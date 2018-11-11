@@ -15,6 +15,10 @@ class AuthController extends Controller
 {
     public function loginAction(AuthenticationUtils $authenticationUtils)
     {
+        if ($this->isGranted('ROLE_USER')) {
+            return $this->redirectToRoute('app.default');
+        }
+
         $error = $authenticationUtils->getLastAuthenticationError();
 
         $lastUsername = $authenticationUtils->getLastUsername();
@@ -33,6 +37,10 @@ class AuthController extends Controller
 
     public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
+        if ($this->isGranted('ROLE_USER')) {
+            return $this->redirectToRoute('app.default');
+        }
+
         $user = new User();
         $form = $this->createForm(RegisterType::class, $user);
 

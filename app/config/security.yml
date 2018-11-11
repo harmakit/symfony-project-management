@@ -5,13 +5,13 @@ security:
         AppBundle\Entity\User:
             algorithm: bcrypt
             cost:      15
-        Symfony\Component\Security\Core\User\User:
-            algorithm: bcrypt
-            cost:      15
+        Symfony\Component\Security\Core\User\User: plaintext
 
-    # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
-        db_provider:
+        chain_provider:
+            chain:
+                providers: [in_memory, user_db]
+        user_db:
             entity:
                 class: AppBundle:User
                 property: username
@@ -19,12 +19,13 @@ security:
             memory:
                 users:
                     admin:
-                        password: $2y$15$y4EqiMpxqCc7iZPivBfsbOPYsidFjuJrypW3/ZTY8/XOMap6qiVRe
+                        password: admin
                         roles: 'ROLE_ADMIN'
 
+    access_control:
+        - { path: ^/workbench/.*, roles: ROLE_USER }
 
     firewalls:
-        # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
@@ -40,6 +41,12 @@ security:
                 secret:   '%kernel.secret%'
                 lifetime: 604800 # 1 week in seconds
                 path:     /
+            logout:
+                path:   app.auth.logout
+                target: app.auth.login
+
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
             # activate different ways to authenticate
 
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate

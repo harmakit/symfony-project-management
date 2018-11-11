@@ -1,8 +1,11 @@
-app.index:
-    path:     /
+app.default:
+    path: /
     defaults: { _controller: AppBundle:Default:index }
 
-#auth
+app.workbench:
+    resource: 'routes/workbench.yml'
+    prefix:   workbench
+
 app.auth:
     resource: 'routes/auth.yml'
     prefix:   /
