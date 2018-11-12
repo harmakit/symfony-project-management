@@ -12,6 +12,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Project;
 use AppBundle\Entity\Role;
 use AppBundle\Entity\User;
+use AppBundle\Form\ProjectType;
 use AppBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
@@ -143,18 +144,29 @@ class AdminController extends Controller
         return $this->render(
             'admin/project/list.html.twig',
             [
-                'project' => $projects
+                'projects' => $projects
             ]
         );
     }
 
     public function constructProjectAction(Request $request, Project $project = null)
     {
-        $user = $this->getUser();
+        $project = $project ?? new Project();
+
+        $form = $this->createForm(ProjectType::class, $project);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($project);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app.admin.project.list');
+        }
         return $this->render(
             'admin/project/construct.html.twig',
             [
-                'user' => $user
+                'form' => $form->createView()
             ]
         );
     }

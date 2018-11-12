@@ -1,6 +1,9 @@
 AppBundle\Entity\Project:
     type: entity
     table: null
+    lifecycleCallbacks:
+        prePersist: [setCreatedAtValue]
+        preUpdate: [setUpdatedAtValue]
     repositoryClass: AppBundle\Repository\ProjectRepository
     id:
         id:

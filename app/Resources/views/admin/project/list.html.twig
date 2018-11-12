@@ -1,0 +1,30 @@
+{% extends 'admin/base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="content">
+            <br>
+            <a class="btn btn-info" href="{{ path('app.admin.project.construct') }}">Create</a>
+            <br>
+            <br>
+            <div class="row divtable" style="font-weight: bold">
+                <div class="col-md-2">Name</div>
+                <div class="col-md-3">Content</div>
+                <div class="col-md-2">Created</div>
+                <div class="col-md-2">Updated</div>
+                <div class="col-md-1">Edit</div>
+                <div class="col-md-1">Delete</div>
+            </div>
+            {% for project in projects %}
+                <div class="row divtable">
+                    <div class="col-md-2">{{ project.name }}</div>
+                    <div class="col-md-3">{{ project.content }}</div>
+                    <div class="col-md-2">{{ project.createdAt|date('Y-m-d H:i:s') }}</div>
+                    <div class="col-md-2">{{ project.updatedAt|date('Y-m-d H:i:s') }}</div>
+                    <div class="col-md-1"><a href="{{ path('app.admin.project.construct', {'project': project.id}) }}">Edit</a></div>
+                    <div class="col-md-1"><a href="{{ path('app.admin.project.delete', {'project': project.id}) }}">Delete</a></div>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+{% endblock %}
