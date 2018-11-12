@@ -9,6 +9,7 @@ class DefaultController extends Controller
 {
     public function indexAction(Request $request)
     {
+
         if (!$this->isGranted('ROLE_USER')) {
             return $this->redirectToRoute('app.auth.login');
         }

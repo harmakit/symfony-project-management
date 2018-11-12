@@ -6,7 +6,6 @@ use AppBundle\Entity\User;
 use AppBundle\Form\LoginType;
 use AppBundle\Form\RegisterType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -50,6 +49,10 @@ class AuthController extends Controller
 
             $password = $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
+
+            $user->setSecurityRoles([
+                'ROLE_USER'
+            ]);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);

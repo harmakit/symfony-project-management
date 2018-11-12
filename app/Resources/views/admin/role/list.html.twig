@@ -1,0 +1,33 @@
+{% extends 'admin/base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="content">
+            <br>
+            <br>
+            <div class="row" style="font-weight: bold">
+                <div class="col-md-2">Name</div>
+                <div class="col-md-2">Creator</div>
+                <div class="col-md-3">Owners</div>
+                <div class="col-md-2">Access</div>
+                <div class="col-md-1">Edit</div>
+                <div class="col-md-1">Delete</div>
+            </div>
+            {% for role in roles %}
+                <div class="row">
+                    <div class="col-md-2">{{ role.name }}</div>
+                    <div class="col-md-2">{{ user.creator.username }}</div>
+                    <div class="col-md-3">
+                        {% for role in user.getAccessRoles %}
+                            {{ role }}
+                            <br>
+                        {% endfor %}
+                    </div>
+
+                    <div class="col-md-1">Edit</div>
+                    <div class="col-md-1">Delete</div>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+{% endblock %}

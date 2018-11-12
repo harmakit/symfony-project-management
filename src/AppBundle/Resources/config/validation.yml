@@ -11,8 +11,3 @@ AppBundle\Entity\User:
     properties:
         email:
             - Email: ~
-        username:
-            - NotEqualTo:
-                value: admin
-                message: 'Username is not unique!'
-                groups: [registration]

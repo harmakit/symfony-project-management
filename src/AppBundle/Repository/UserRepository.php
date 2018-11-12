@@ -10,4 +10,13 @@ namespace AppBundle\Repository;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findAll()
+    {
+        $qb = $this->createQueryBuilder('u');
+        $qb->where('u.username != :admin')
+            ->setParameter('admin', 'admin');
+
+        return $qb->getQuery()
+            ->getResult();
+    }
 }

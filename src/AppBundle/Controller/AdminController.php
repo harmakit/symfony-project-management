@@ -9,19 +9,166 @@
 namespace AppBundle\Controller;
 
 
+use AppBundle\Entity\Project;
+use AppBundle\Entity\Role;
+use AppBundle\Entity\User;
+use AppBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdminController extends Controller
 {
     public function indexAction(Request $request)
     {
+        return $this->render(
+            '/admin/index.html.twig'
+        );
+    }
+
+    public function listUserAction(Request $request)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $users = $entityManager->getRepository(User::class)->findAll();
+
+        return $this->render(
+            'admin/user/list.html.twig',
+            [
+                'users' => $users
+            ]
+        );
+    }
+
+    public function constructUserAction(Request $request, User $user = null)
+    {
+        $create = false;
+        if (!$user) {
+            $create = true;
+            $user = new User();
+        }
+        $form = $this->createForm(UserType::class, $user);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $password = $form->get('password')->getData();
+            if ($password) {
+                if (strlen($password) < 6) {
+                    $form->get('password')->addError(new FormError('Password min length is 6'));
+                }
+                $password = $this->get('security.password_encoder')->encodePassword($user, $user->getPassword());
+                $user->setPassword($password);
+            } else {
+                if ($create) {
+                    $form->get('password')->addError(new FormError('Password is not defined'));
+                }
+            }
+            if ($create) {
+                $user->setSecurityRoles([
+                    'ROLE_USER'
+                ]);
+            }
+
+            if (count($form->getErrors()) === 0) {
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($user);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('app.admin.user.list');
+            }
+        }
+
+        return $this->render(
+            'admin/user/construct.html.twig',
+            [
+                'form' => $form->createView()
+            ]
+        );
+    }
+
+    public function deleteUserAction(Request $request, User $user = null)
+    {
+        if (!$user || $user->getUsername() === 'admin') {
+            return $this->redirectToRoute('app.admin.user.list');
+        }
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($user);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app.admin.user.list');
+    }
+
+    public function listRoleAction(Request $request)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $roles = $entityManager->getRepository(Role::class)->findAll();
+
+        return $this->render(
+            'admin/role/list.html.twig',
+            [
+                'roles' => $roles
+            ]
+        );
+    }
+
+    public function constructRoleAction(Request $request, Role $role = null)
+    {
         $user = $this->getUser();
         return $this->render(
-            '/admin/index.html.twig',
+            'admin/role/construct.html.twig',
             [
                 'user' => $user
             ]
         );
+    }
+
+    public function deleteRoleAction(Request $request, Role $role = null)
+    {
+        if (!$role) {
+            return $this->redirectToRoute('app.admin.role.list');
+        }
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($role);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app.admin.role.list');
+    }
+
+    public function listProjectAction(Request $request)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $projects = $entityManager->getRepository(Project::class)->findAll();
+
+        return $this->render(
+            'admin/project/list.html.twig',
+            [
+                'project' => $projects
+            ]
+        );
+    }
+
+    public function constructProjectAction(Request $request, Project $project = null)
+    {
+        $user = $this->getUser();
+        return $this->render(
+            'admin/project/construct.html.twig',
+            [
+                'user' => $user
+            ]
+        );
+    }
+
+    public function deleteProjectAction(Request $request, Project $project = null)
+    {
+        if (!$project) {
+            return $this->redirectToRoute('app.admin.project.list');
+        }
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($project);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app.admin.project.list');
     }
 }

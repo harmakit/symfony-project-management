@@ -20,11 +20,9 @@ AppBundle\Entity\User:
         password:
             type: string
             length: 255
-    manyToOne:
-        createdRoles:
-            column: created_roles
-            targetEntity: AppBundle\Entity\Role
-            inversedBy: creator
+        securityRoles:
+            column: security_roles
+            type: array
     manyToMany:
         accessRoles:
             targetEntity: AppBundle\Entity\Role

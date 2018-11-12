@@ -12,10 +12,6 @@ AppBundle\Entity\Role:
         name:
             type: string
             length: 255
-    oneToMany:
-        creator:
-            targetEntity: AppBundle\Entity\User
-            mappedBy: createdRoles
     manyToMany:
         access:
             targetEntity: AppBundle\Entity\Access

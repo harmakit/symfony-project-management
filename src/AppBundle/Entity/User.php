@@ -29,11 +29,6 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @var \AppBundle\Entity\Role
-     */
-    private $createdRoles;
-
-    /**
      * @var \Doctrine\Common\Collections\Collection
      */
     private $accessRoles;
@@ -139,30 +134,6 @@ class User implements UserInterface
     }
 
     /**
-     * Set createdRoles
-     *
-     * @param \AppBundle\Entity\Role $createdRoles
-     *
-     * @return User
-     */
-    public function setCreatedRoles(\AppBundle\Entity\Role $createdRoles = null)
-    {
-        $this->createdRoles = $createdRoles;
-
-        return $this;
-    }
-
-    /**
-     * Get createdRoles
-     *
-     * @return \AppBundle\Entity\Role
-     */
-    public function getCreatedRoles()
-    {
-        return $this->createdRoles;
-    }
-
-    /**
      * Add accessRole
      *
      * @param \AppBundle\Entity\Role $accessRole
@@ -212,9 +183,7 @@ class User implements UserInterface
      */
     public function getRoles()
     {
-        return [
-            'ROLE_USER'
-        ];
+        return $this->securityRoles;
     }
 
     /**
@@ -225,5 +194,36 @@ class User implements UserInterface
      */
     public function eraseCredentials()
     {
+    }
+
+
+    /**
+     * @var array
+     */
+    private $securityRoles;
+
+
+    /**
+     * Set securityRoles
+     *
+     * @param array $securityRoles
+     *
+     * @return User
+     */
+    public function setSecurityRoles($securityRoles)
+    {
+        $this->securityRoles = $securityRoles;
+
+        return $this;
+    }
+
+    /**
+     * Get securityRoles
+     *
+     * @return array
+     */
+    public function getSecurityRoles()
+    {
+        return $this->securityRoles;
     }
 }

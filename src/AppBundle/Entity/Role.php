@@ -5,9 +5,9 @@ namespace AppBundle\Entity;
 /**
  * Role
  */
-class Role extends \Symfony\Component\Security\Core\Role\Role
+class Role
 {
-   
+
     /**
      * @var integer
      */
@@ -21,11 +21,6 @@ class Role extends \Symfony\Component\Security\Core\Role\Role
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $creator;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
     private $access;
 
     /**
@@ -33,6 +28,10 @@ class Role extends \Symfony\Component\Security\Core\Role\Role
      */
     private $users;
 
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     /**
      * Get id
@@ -66,40 +65,6 @@ class Role extends \Symfony\Component\Security\Core\Role\Role
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Add creator
-     *
-     * @param \AppBundle\Entity\User $creator
-     *
-     * @return Role
-     */
-    public function addCreator(\AppBundle\Entity\User $creator)
-    {
-        $this->creator[] = $creator;
-
-        return $this;
-    }
-
-    /**
-     * Remove creator
-     *
-     * @param \AppBundle\Entity\User $creator
-     */
-    public function removeCreator(\AppBundle\Entity\User $creator)
-    {
-        $this->creator->removeElement($creator);
-    }
-
-    /**
-     * Get creator
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCreator()
-    {
-        return $this->creator;
     }
 
     /**
@@ -169,4 +134,15 @@ class Role extends \Symfony\Component\Security\Core\Role\Role
     {
         return $this->users;
     }
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->access = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
 }
