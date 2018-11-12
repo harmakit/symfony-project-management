@@ -13,6 +13,7 @@ use AppBundle\Entity\Project;
 use AppBundle\Entity\Role;
 use AppBundle\Entity\User;
 use AppBundle\Form\ProjectType;
+use AppBundle\Form\RoleType;
 use AppBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
@@ -114,11 +115,34 @@ class AdminController extends Controller
 
     public function constructRoleAction(Request $request, Role $role = null)
     {
-        $user = $this->getUser();
+        $role = $role ?? new Role();
+
+        $form = $this->createForm(RoleType::class, $role);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $accesses = $form->get('access')->getData();
+            foreach ($accesses as $access) {
+                $access->setRole($role);
+                $projects = $access->getProjects();
+                foreach ($projects as $project) {
+                    $project->addAccess($access);
+                    $entityManager->persist($project);
+                }
+                $entityManager->persist($access);
+            }
+
+            $entityManager->persist($role);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app.admin.role.list');
+        }
         return $this->render(
             'admin/role/construct.html.twig',
             [
-                'user' => $user
+                'form' => $form->createView()
             ]
         );
     }

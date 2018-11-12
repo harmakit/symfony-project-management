@@ -11,10 +11,11 @@ AppBundle\Entity\Access:
     fields:
         type:
             type: integer
-    manyToMany:
+    manyToOne:
         role:
             targetEntity: AppBundle\Entity\Role
-            mappedBy: access
+            inversedBy: access
+    manyToMany:
         projects:
             targetEntity: AppBundle\Entity\Project
             mappedBy: access

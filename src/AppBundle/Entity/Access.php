@@ -21,10 +21,6 @@ class Access
      */
     private $type;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $role;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -36,7 +32,6 @@ class Access
      */
     public function __construct()
     {
-        $this->role = new \Doctrine\Common\Collections\ArrayCollection();
         $this->projects = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -75,40 +70,6 @@ class Access
     }
 
     /**
-     * Add role
-     *
-     * @param \AppBundle\Entity\Role $role
-     *
-     * @return Access
-     */
-    public function addRole(\AppBundle\Entity\Role $role)
-    {
-        $this->role[] = $role;
-
-        return $this;
-    }
-
-    /**
-     * Remove role
-     *
-     * @param \AppBundle\Entity\Role $role
-     */
-    public function removeRole(\AppBundle\Entity\Role $role)
-    {
-        $this->role->removeElement($role);
-    }
-
-    /**
-     * Get role
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getRole()
-    {
-        return $this->role;
-    }
-
-    /**
      * Add project
      *
      * @param \AppBundle\Entity\Project $project
@@ -140,5 +101,34 @@ class Access
     public function getProjects()
     {
         return $this->projects;
+    }
+
+    /**
+     * @var \AppBundle\Entity\Role
+     */
+    private $role;
+
+    /**
+     * Set role
+     *
+     * @param \AppBundle\Entity\Role $role
+     *
+     * @return Access
+     */
+    public function setRole(\AppBundle\Entity\Role $role = null)
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
+    /**
+     * Get role
+     *
+     * @return \AppBundle\Entity\Role
+     */
+    public function getRole()
+    {
+        return $this->role;
     }
 }

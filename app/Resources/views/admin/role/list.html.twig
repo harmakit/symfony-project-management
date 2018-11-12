@@ -3,8 +3,10 @@
     <div class="container">
         <div class="content">
             <br>
+            <a class="btn btn-info" href="{{ path('app.admin.role.construct') }}">Create</a>
             <br>
-            <div class="row" style="font-weight: bold">
+            <br>
+            <div class="row divtable" style="font-weight: bold">
                 <div class="col-md-2">Name</div>
                 <div class="col-md-3">Owners</div>
                 <div class="col-md-2">Access</div>
@@ -12,16 +14,25 @@
                 <div class="col-md-1">Delete</div>
             </div>
             {% for role in roles %}
-                <div class="row">
+                <div class="row divtable">
                     <div class="col-md-2">{{ role.name }}</div>
                     <div class="col-md-3">
-                        {% for role in user.getAccessRoles %}
-                            {{ role }}
+                        {% for user in role.users %}
+                            {{ user.username }}
                             <br>
                         {% endfor %}
                     </div>
-                    <div class="col-md-1">Edit</div>
-                    <div class="col-md-1">Delete</div>
+                    <div class="col-md-2">
+                        {% for access in role.access %}
+                            <b>{{ ('access.type.' ~ access.type)|trans({}, 'admin') }} : </b>
+                                {% for project in access.projects %}
+                                    {{ project.name }} <br>
+                                {% endfor %}
+                            <br>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-1"><a href="{{ path('app.admin.role.construct', {'role': role.id}) }}">Edit</a></div>
+                    <div class="col-md-1"><a href="{{ path('app.admin.role.delete', {'role': role.id}) }}">Delete</a></div>
                 </div>
             {% endfor %}
         </div>

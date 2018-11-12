@@ -18,10 +18,6 @@ class Role
      */
     private $name;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $access;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -67,39 +63,6 @@ class Role
         return $this->name;
     }
 
-    /**
-     * Add access
-     *
-     * @param \AppBundle\Entity\Access $access
-     *
-     * @return Role
-     */
-    public function addAccess(\AppBundle\Entity\Access $access)
-    {
-        $this->access[] = $access;
-
-        return $this;
-    }
-
-    /**
-     * Remove access
-     *
-     * @param \AppBundle\Entity\Access $access
-     */
-    public function removeAccess(\AppBundle\Entity\Access $access)
-    {
-        $this->access->removeElement($access);
-    }
-
-    /**
-     * Get access
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAccess()
-    {
-        return $this->access;
-    }
 
     /**
      * Add user
@@ -145,4 +108,42 @@ class Role
         $this->users = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $access;
+
+    /**
+     * Add access
+     *
+     * @param \AppBundle\Entity\Access $access
+     *
+     * @return Role
+     */
+    public function addAccess(\AppBundle\Entity\Access $access)
+    {
+        $this->access[] = $access;
+
+        return $this;
+    }
+
+    /**
+     * Remove access
+     *
+     * @param \AppBundle\Entity\Access $access
+     */
+    public function removeAccess(\AppBundle\Entity\Access $access)
+    {
+        $this->access->removeElement($access);
+    }
+
+    /**
+     * Get access
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAccess()
+    {
+        return $this->access;
+    }
 }
