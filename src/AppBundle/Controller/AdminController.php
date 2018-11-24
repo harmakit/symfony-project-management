@@ -24,8 +24,21 @@ class AdminController extends Controller
 {
     public function indexAction(Request $request)
     {
+        $entityManager = $this->getDoctrine()->getManager();
+        $projects = $entityManager->getRepository(Project::class)->findAll();
+        $users = $entityManager->getRepository(User::class)->findAll();
+        $roles = $entityManager->getRepository(Role::class)->findAll();
+
+        $params = [
+            'Projects' => $projects,
+            'Users' => $users,
+            'Roles' => $roles
+        ];
+
         return $this->render(
-            '/admin/index.html.twig'
+            '/admin/index.html.twig', [
+                'params' => $params
+            ]
         );
     }
 
