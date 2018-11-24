@@ -3,38 +3,47 @@
     <div class="container">
         <div class="content">
             <br>
-            <a class="btn btn-info" href="{{ path('app.admin.role.construct') }}">Create</a>
+            <a class="btn btn-success" href="{{ path('app.admin.role.construct') }}">Create</a>
             <br>
             <br>
-            <div class="row divtable" style="font-weight: bold">
-                <div class="col-md-2">Name</div>
-                <div class="col-md-3">Owners</div>
-                <div class="col-md-2">Access</div>
-                <div class="col-md-1">Edit</div>
-                <div class="col-md-1">Delete</div>
-            </div>
-            {% for role in roles %}
-                <div class="row divtable">
-                    <div class="col-md-2">{{ role.name }}</div>
-                    <div class="col-md-3">
-                        {% for user in role.users %}
-                            {{ user.username }}
-                            <br>
-                        {% endfor %}
-                    </div>
-                    <div class="col-md-2">
-                        {% for access in role.accesses %}
-                            <b>{{ ('access.type.' ~ access.type)|trans({}, 'admin') }} : </b>
+            <table class="table table-striped">
+                <thead style="background-color: #4a4a4a; color: white">
+                    <tr>
+                       <th scope="col">Name</th>
+                       <th scope="col">Owners</th>
+                       <th scope="col">Access</th>
+                       <th scope="col">Edit</th>
+                       <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for role in roles %}
+                    <tr>
+                        <td>
+                            {{ role.name }}
+                        </td>
+                        <td>
+                            {% for user in role.users %}
+                                <a href="{{ path('app.admin.user.construct', {'user': user.id}) }}">{{ user.username }}</a>
+                                <br>
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% for access in role.accesses %}
+                                <b>{{ ('access.type.' ~ access.type)|trans({}, 'admin') }} : </b>
                                 {% for project in access.projects %}
-                                    {{ project.name }} <br>
+                                    <a href="{{ path('app.admin.project.construct', {'project': project.id}) }}">{{ project.name }}</a>
+                                    <br>
                                 {% endfor %}
-                            <br>
-                        {% endfor %}
-                    </div>
-                    <div class="col-md-1"><a href="{{ path('app.admin.role.construct', {'role': role.id}) }}">Edit</a></div>
-                    <div class="col-md-1"><a href="{{ path('app.admin.role.delete', {'role': role.id}) }}">Delete</a></div>
-                </div>
-            {% endfor %}
+                                <br>
+                            {% endfor %}
+                        </td>
+                        <td><a href="{{ path('app.admin.role.construct', {'role': role.id}) }}">Edit</a></td>
+                        <td><a href="{{ path('app.admin.role.delete', {'role': role.id}) }}">Delete</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
 
     </div>

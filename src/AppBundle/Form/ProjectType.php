@@ -23,7 +23,7 @@ class ProjectType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => false,
+                'label' => 'Project name',
                 'attr' => [
                     'placeholder' => 'Name',
                     'class' => 'form-control',
@@ -33,7 +33,7 @@ class ProjectType extends AbstractType
                 ]
             ])
             ->add('content', TextareaType::class, [
-                'label' => false,
+                'label' => 'Content',
                 'attr' => [
                     'placeholder' => 'Content',
                     'class' => 'form-control'

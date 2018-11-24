@@ -30,7 +30,7 @@ class UserType extends AbstractType
     {
         $builder
             ->add('username', TextType::class, [
-                'label' => false,
+                'label' => 'Username',
                 'attr' => [
                     'placeholder' => 'Username',
                     'class' => 'form-control',
@@ -40,7 +40,7 @@ class UserType extends AbstractType
                 ]
             ])
             ->add('email', EmailType::class, [
-                'label' => false,
+                'label' => 'Email',
                 'attr' => [
                     'placeholder' => 'Email',
                     'class' => 'form-control'
@@ -50,7 +50,7 @@ class UserType extends AbstractType
                 ]
             ])
             ->add('password', TextType::class, [
-                'label' => false,
+                'label' => 'Password',
                 'attr' => [
                     'placeholder' => 'Password',
                     'class' => 'form-control'
@@ -65,12 +65,12 @@ class UserType extends AbstractType
             ])
             ->add('accessRoles', EntityType::class, [
                 'class' => Role::class,
-                'label' => false,
+                'label' => 'Roles',
                 'multiple' => true,
+                'expanded' => true,
                 'choice_label' => 'name',
                 'attr' => [
-                    'placeholder' => 'Roles',
-                    'class' => 'form-control'
+                    'class' => 'form-control',
                 ],
                 'required' => false
             ])

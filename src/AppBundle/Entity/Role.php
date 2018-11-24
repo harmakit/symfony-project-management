@@ -73,6 +73,7 @@ class Role
      */
     public function addUser(\AppBundle\Entity\User $user)
     {
+        $user->addAccessRole($this);
         $this->users[] = $user;
 
         return $this;

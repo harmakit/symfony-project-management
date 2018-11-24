@@ -8,24 +8,17 @@
                 <div class="col-lg-12">
                     <div id="register-form">
                         {{ form_start(form) }}
-                        <div class="form-group">
-                            {{ form_label(form.name) }}
-                            {{ form_widget(form.name) }}
-                            <div class="alert-danger" style="border-radius: 5px">
-                                {{ form_errors(form.name) }}
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            {{ form_label(form.accesses) }}
-                            {{ form_widget(form.accesses) }}
-                            <div class="alert-danger" style="border-radius: 5px">
-                                {{ form_errors(form.accesses) }}
-                            </div>
-                        </div>
-
-
+                        {% for value in form %}
+                            {% if value.vars.block_prefixes.1 != "hidden" %}
+                                <div class="form-group">
+                                    {{ form_label(value) }}
+                                    {{ form_widget(value) }}
+                                    <div class="alert-danger" style="border-radius: 5px">
+                                        {{ form_errors(value) }}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-6 col-sm-offset-3">
@@ -38,5 +31,6 @@
                 </div>
             </div>
         </div>
+
     </div>
 {% endblock %}

@@ -21,4 +21,5 @@ AppBundle\Entity\Role:
         users:
             targetEntity: AppBundle\Entity\User
             mappedBy: accessRoles
+            cascade: ['persist']
     lifecycleCallbacks: {  }

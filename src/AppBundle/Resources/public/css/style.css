@@ -6,18 +6,3 @@ body {
     padding: 40px 15px;
     text-align: center;
 }
-
-.row {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display:         flex;
-    flex-wrap: wrap;
-}
-.divtable > [class*='col-'] {
-    display: flex;
-    flex-direction: column;
-    border: darkslategrey 1px solid;
-    border-collapse: collapse;
-    word-wrap: break-word
-}
