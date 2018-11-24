@@ -18,7 +18,7 @@
                     <div class="col-md-2">{{ role.name }}</div>
                     <div class="col-md-3">
                         {% for user in role.users %}
-                            {{ user.username }}
+                            <a href="{{ path('app.admin.user.construct', {'user': user.id}) }}">{{ user.username }}</a>
                             <br>
                         {% endfor %}
                     </div>
@@ -26,7 +26,8 @@
                         {% for access in role.accesses %}
                             <b>{{ ('access.type.' ~ access.type)|trans({}, 'admin') }} : </b>
                                 {% for project in access.projects %}
-                                    {{ project.name }} <br>
+                                    <a href="{{ path('app.admin.project.construct', {'project': project.id}) }}">{{ project.name }}</a>
+                                    <br>
                                 {% endfor %}
                             <br>
                         {% endfor %}

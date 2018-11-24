@@ -67,6 +67,7 @@ class UserType extends AbstractType
                 'class' => Role::class,
                 'label' => false,
                 'multiple' => true,
+                'expanded' => true,
                 'choice_label' => 'name',
                 'attr' => [
                     'placeholder' => 'Roles',

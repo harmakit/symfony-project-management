@@ -19,4 +19,13 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
         return $qb->getQuery()
             ->getResult();
     }
+
+    public function findAllQB()
+    {
+        $qb = $this->createQueryBuilder('u');
+        $qb->where('u.username != :admin')
+            ->setParameter('admin', 'admin');
+
+        return $qb;
+    }
 }

@@ -20,7 +20,7 @@
                     <div class="col-md-3">{{ user.email }}</div>
                     <div class="col-md-3">
                         {% for role in user.getAccessRoles %}
-                            {{ role }}
+                            <a href="{{ path('app.admin.role.construct', {'role': role.id}) }}">{{ role }}</a>
                             <br>
                         {% endfor %}
                     </div>

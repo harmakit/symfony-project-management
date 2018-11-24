@@ -9,6 +9,9 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\Role;
+use AppBundle\Entity\User;
+use AppBundle\Repository\UserRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -41,6 +44,23 @@ class RoleType extends AbstractType
                 'required' => false,
                 'by_reference' => false
             ))
+            ->add('users', EntityType::class, [
+                'class' => User::class,
+                'label' => false,
+                'multiple' => true,
+                'expanded' => true,
+                'choice_label' => 'username',
+                'attr' => [
+                    'placeholder' => 'Users',
+                    'class' => 'form-control form-group',
+                    'style' => 'width: 80%'
+                ],
+                'required' => false,
+                'by_reference' => false,
+                'query_builder' => function(UserRepository $userRepository) {
+                    return $userRepository->findAllQB();
+                }
+            ])
         ;
     }
 
