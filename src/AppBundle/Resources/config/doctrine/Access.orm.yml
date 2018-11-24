@@ -14,9 +14,9 @@ AppBundle\Entity\Access:
     manyToOne:
         role:
             targetEntity: AppBundle\Entity\Role
-            inversedBy: access
+            inversedBy: accesses
     manyToMany:
         projects:
             targetEntity: AppBundle\Entity\Project
-            mappedBy: access
+            inversedBy: access
     lifecycleCallbacks: {  }

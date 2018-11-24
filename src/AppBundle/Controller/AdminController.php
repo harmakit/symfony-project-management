@@ -9,6 +9,7 @@
 namespace AppBundle\Controller;
 
 
+use AppBundle\Entity\Access;
 use AppBundle\Entity\Project;
 use AppBundle\Entity\Role;
 use AppBundle\Entity\User;
@@ -115,30 +116,31 @@ class AdminController extends Controller
 
     public function constructRoleAction(Request $request, Role $role = null)
     {
-        $role = $role ?? new Role();
+        if (!$role) {
+            $role = new Role();
 
-        $form = $this->createForm(RoleType::class, $role);
-        $form->handleRequest($request);
+            $RWD = new Access(Access::READ_WRITE_DELETE);
+            $RW = new Access(Access::READ_WRITE);
+            $R = new Access(Access::READ);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-
-            $accesses = $form->get('access')->getData();
-            foreach ($accesses as $access) {
-                $access->setRole($role);
-                $projects = $access->getProjects();
-                foreach ($projects as $project) {
-                    $project->addAccess($access);
-                    $entityManager->persist($project);
-                }
-                $entityManager->persist($access);
-            }
-
-            $entityManager->persist($role);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app.admin.role.list');
+            $role
+                ->addAccess($RWD)
+                ->addAccess($RW)
+                ->addAccess($R)
+            ;
         }
+
+            $form = $this->createForm(RoleType::class, $role);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager = $this->getDoctrine()->getManager();
+
+                $entityManager->persist($role);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('app.admin.role.list');
+            }
         return $this->render(
             'admin/role/construct.html.twig',
             [

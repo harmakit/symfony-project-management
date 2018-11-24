@@ -13,10 +13,10 @@ AppBundle\Entity\Role:
             type: string
             length: 255
     oneToMany:
-        access:
+        accesses:
             targetEntity: AppBundle\Entity\Access
             mappedBy: role
-            cascade: ['persist', 'remove']
+            cascade: ['all']
     manyToMany:
         users:
             targetEntity: AppBundle\Entity\User

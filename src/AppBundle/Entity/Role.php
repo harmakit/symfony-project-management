@@ -104,25 +104,26 @@ class Role
      */
     public function __construct()
     {
-        $this->access = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->accesses = new \Doctrine\Common\Collections\ArrayCollection();
         $this->users = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $access;
+    private $accesses;
 
     /**
      * Add access
      *
-     * @param \AppBundle\Entity\Access $access
+     * @param \AppBundle\Entity\Access $accesses
      *
      * @return Role
      */
     public function addAccess(\AppBundle\Entity\Access $access)
     {
-        $this->access[] = $access;
+        $access->setRole($this);
+        $this->accesses[] = $access;
 
         return $this;
     }
@@ -134,16 +135,16 @@ class Role
      */
     public function removeAccess(\AppBundle\Entity\Access $access)
     {
-        $this->access->removeElement($access);
+        $this->accesses->removeElement($access);
     }
 
     /**
-     * Get access
+     * Get accesses
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getAccess()
+    public function getAccesses()
     {
-        return $this->access;
+        return $this->accesses;
     }
 }

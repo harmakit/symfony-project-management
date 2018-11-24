@@ -30,8 +30,11 @@ class Access
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct($type = null)
     {
+        if (null !== $type) {
+            $this->type = $type;
+        }
         $this->projects = new \Doctrine\Common\Collections\ArrayCollection();
     }
 

@@ -28,5 +28,5 @@ AppBundle\Entity\Project:
     manyToMany:
         access:
             targetEntity: AppBundle\Entity\Access
-            inversedBy: projects
+            mappedBy: projects
     lifecycleCallbacks: {  }

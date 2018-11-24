@@ -180,7 +180,7 @@ class Project
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getAccess()
+    public function getAccesses()
     {
         return $this->access;
     }

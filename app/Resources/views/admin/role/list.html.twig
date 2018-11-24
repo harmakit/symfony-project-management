@@ -23,7 +23,7 @@
                         {% endfor %}
                     </div>
                     <div class="col-md-2">
-                        {% for access in role.access %}
+                        {% for access in role.accesses %}
                             <b>{{ ('access.type.' ~ access.type)|trans({}, 'admin') }} : </b>
                                 {% for project in access.projects %}
                                     {{ project.name }} <br>

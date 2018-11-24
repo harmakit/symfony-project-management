@@ -26,12 +26,13 @@ class AccessType extends AbstractType
             ->add('type', ChoiceType::class, [
                 'label' => false,
                 'choices' => [
-                    'Full Access' => Access::READ_WRITE_DELETE,
-                    'Edit Access' => Access::READ_WRITE,
-                    'Read Access' => Access::READ
+                    'access.type.' . Access::READ_WRITE_DELETE => Access::READ_WRITE_DELETE,
+                    'access.type.' . Access::READ_WRITE => Access::READ_WRITE,
+                    'access.type.' . Access::READ => Access::READ
                 ],
+                'disabled' => true,
+                'choice_translation_domain' => 'admin',
                 'attr' => [
-                    'placeholder' => 'Username',
                     'class' => 'form-control',
                     'style' => 'width: 80%'
                 ],
@@ -43,13 +44,15 @@ class AccessType extends AbstractType
                 'class' => Project::class,
                 'label' => false,
                 'multiple' => true,
+                'expanded' => true,
                 'choice_label' => 'name',
                 'attr' => [
                     'placeholder' => 'Projects',
-                    'class' => 'form-control',
+                    'class' => 'form-control form-group',
                     'style' => 'width: 80%'
                 ],
-                'required' => false
+                'required' => false,
+                'by_reference' => false
             ])
         ;
     }

@@ -18,13 +18,11 @@
 
 
                         <div class="form-group">
-                            {#{{ form_label(form.access) }}#}
-                            <ul class="accesses" data-prototype="{{ form_widget(form.access.vars.prototype)|e('html_attr') }}">
-                            </ul>
-                            {#{{ form_widget(form.access) }}#}
-                            {#<div class="alert-danger" style="border-radius: 5px">#}
-                                {#{{ form_errors(form.access) }}#}
-                            {#</div>#}
+                            {{ form_label(form.accesses) }}
+                            {{ form_widget(form.accesses) }}
+                            <div class="alert-danger" style="border-radius: 5px">
+                                {{ form_errors(form.accesses) }}
+                            </div>
                         </div>
 
 
@@ -41,37 +39,4 @@
             </div>
         </div>
     </div>
-    <script>
-        var $addAccessLink = $('<a href="#" class="add_access_link">Add an access</a>');
-        var $newLinkLi = $('<li></li>').append($addAccessLink);
-
-        jQuery(document).ready(function() {
-            var $collectionHolder = $('ul.accesses');
-            $collectionHolder.append($newLinkLi);
-            $collectionHolder.data('index', $collectionHolder.find(':input').length);
-            $addAccessLink.on('click', function(e) {
-                e.preventDefault();
-                addAccessForm($collectionHolder, $newLinkLi);
-            });
-
-
-        });
-
-        function addAccessForm($collectionHolder, $newLinkLi) {
-            var prototype = $collectionHolder.data('prototype');
-            var index = $collectionHolder.data('index');
-            var newForm = prototype.replace(/__name__/g, index);
-            $collectionHolder.data('index', index + 1);
-            var $newFormLi = $('<li></li>').append(newForm);
-            $newFormLi.append('<a href="#" class="remove-access">x</a>');
-            $newLinkLi.before($newFormLi);
-            $('.remove-access').click(function(e) {
-                e.preventDefault();
-
-                $(this).parent().remove();
-
-                return false;
-            });
-        }
-    </script>
 {% endblock %}
