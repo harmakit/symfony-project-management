@@ -3,17 +3,18 @@
     <div class="container">
 
         <div class="content">
-            <h1>Welcome to Admin Panel</h1>
+            <h1>Admin Panel</h1>
             <br>
+            <h4>Statistics:</h4>
             <table class="table table-striped">
                 <tbody>
-                    {% for name,enntities in params %}
+                    {% for name, entities in params %}
                     <tr>
                         <td>
                             {{ name }}
                         </td>
                         <td>
-                            {{ enntities|length }}
+                            {{ entities|length }}
                         </td>
                     </tr>
                     {% endfor %}

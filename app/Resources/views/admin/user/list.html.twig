@@ -32,8 +32,12 @@
                                 <br>
                             {% endfor %}
                         </td>
-                        <td><a href="{{ path('app.admin.user.construct', {'user': user.id}) }}">Edit</a></td>
-                        <td><a href="{{ path('app.admin.user.delete', {'user': user.id}) }}">Delete</a></td>
+                        <td>
+                            <a href="{{ path('app.admin.user.construct', {'user': user.id}) }}">Edit</a>
+                        </td>
+                        <td>
+                            <a href="{{ path('app.admin.user.delete', {'user': user.id}) }}">Delete</a>
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>

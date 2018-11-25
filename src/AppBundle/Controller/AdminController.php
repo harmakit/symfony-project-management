@@ -101,12 +101,8 @@ class AdminController extends Controller
         );
     }
 
-    public function deleteUserAction(Request $request, User $user = null)
+    public function deleteUserAction(Request $request, User $user )
     {
-        if (!$user || $user->getUsername() === 'admin') {
-            return $this->redirectToRoute('app.admin.user.list');
-        }
-
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($user);
         $entityManager->flush();
@@ -132,8 +128,8 @@ class AdminController extends Controller
         if (!$role) {
             $role = new Role();
 
-            $RWD = new Access(Access::READ_WRITE_DELETE);
-            $RW = new Access(Access::READ_WRITE);
+            $RWD = new Access(Access::DELETE);
+            $RW = new Access(Access::WRITE);
             $R = new Access(Access::READ);
 
             $role
@@ -162,12 +158,8 @@ class AdminController extends Controller
         );
     }
 
-    public function deleteRoleAction(Request $request, Role $role = null)
+    public function deleteRoleAction(Request $request, Role $role )
     {
-        if (!$role) {
-            return $this->redirectToRoute('app.admin.role.list');
-        }
-
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($role);
         $entityManager->flush();
@@ -210,12 +202,8 @@ class AdminController extends Controller
         );
     }
 
-    public function deleteProjectAction(Request $request, Project $project = null)
+    public function deleteProjectAction(Request $request, Project $project)
     {
-        if (!$project) {
-            return $this->redirectToRoute('app.admin.project.list');
-        }
-
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($project);
         $entityManager->flush();

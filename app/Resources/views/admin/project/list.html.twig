@@ -32,8 +32,12 @@
                         <td>
                             {{ project.updatedAt|date('Y-m-d H:i:s') }}
                         </td>
-                        <td><a href="{{ path('app.admin.project.construct', {'project': project.id}) }}">Edit</a></td>
-                        <td><a href="{{ path('app.admin.project.delete', {'project': project.id}) }}">Delete</a></td>
+                        <td>
+                            <a href="{{ path('app.admin.project.construct', {'project': project.id}) }}">Edit</a>
+                        </td>
+                        <td>
+                            <a href="{{ path('app.admin.project.delete', {'project': project.id}) }}">Delete</a>
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>

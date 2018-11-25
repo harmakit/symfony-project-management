@@ -1,5 +1,5 @@
 access:
     type:
-        0: Full Access
+        0: Delete Access
         1: Write Access
         2: Read Access

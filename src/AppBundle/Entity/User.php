@@ -157,6 +157,47 @@ class User implements UserInterface
         $this->accessRoles->removeElement($accessRole);
     }
 
+    public function getProjects()
+    {
+        $projects = [];
+
+        $roles = $this->getAccessRoles();
+        foreach ($roles as $role) {
+            $accesses = $role->getAccesses();
+            foreach ($accesses as $access) {
+                $values = $access->getProjects()->getValues();
+                foreach ($values as $value) {
+                    if (!in_array($value, $projects)) {
+                        $projects[] = $value;
+                    }
+                }
+            }
+        }
+
+        return $projects;
+    }
+
+    public function getProjectsByAccess()
+    {
+        $projects = [
+            Access::DELETE => [],
+            Access::WRITE => [],
+            Access::READ => []
+        ];
+        $roles = $this->getAccessRoles();
+        foreach ($roles as $role) {
+            $accesses = $role->getAccesses();
+            foreach ($accesses as $access) {
+                $values = $access->getProjects()->getValues();
+                foreach ($values as $value) {
+                    $projects[$access->getType()][] = $value;
+                }
+            }
+        }
+
+        return $projects;
+    }
+
     /**
      * Get accessRoles
      *

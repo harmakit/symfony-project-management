@@ -38,8 +38,12 @@
                                 <br>
                             {% endfor %}
                         </td>
-                        <td><a href="{{ path('app.admin.role.construct', {'role': role.id}) }}">Edit</a></td>
-                        <td><a href="{{ path('app.admin.role.delete', {'role': role.id}) }}">Delete</a></td>
+                        <td>
+                            <a href="{{ path('app.admin.role.construct', {'role': role.id}) }}">Edit</a>
+                        </td>
+                        <td>
+                            <a href="{{ path('app.admin.role.delete', {'role': role.id}) }}">Delete</a>
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>

@@ -26,8 +26,8 @@ class AccessType extends AbstractType
             ->add('type', ChoiceType::class, [
                 'label' => false,
                 'choices' => [
-                    'access.type.' . Access::READ_WRITE_DELETE => Access::READ_WRITE_DELETE,
-                    'access.type.' . Access::READ_WRITE => Access::READ_WRITE,
+                    'access.type.' . Access::DELETE => Access::DELETE,
+                    'access.type.' . Access::WRITE => Access::WRITE,
                     'access.type.' . Access::READ => Access::READ
                 ],
                 'disabled' => true,

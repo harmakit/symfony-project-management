@@ -7,8 +7,8 @@ namespace AppBundle\Entity;
  */
 class Access
 {
-    const READ_WRITE_DELETE = 0;
-    const READ_WRITE = 1;
+    const DELETE = 0;
+    const WRITE = 1;
     const READ = 2;
 
     /**
