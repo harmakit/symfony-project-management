@@ -32,8 +32,8 @@
                             {% for access in role.accesses %}
                                 <b>{{ ('access.type.' ~ access.type)|trans({}, 'admin') }} : </b>
                                 {% for project in access.projects %}
-                                    <a href="{{ path('app.admin.project.construct', {'project': project.id}) }}">{{ project.name }}</a>
                                     <br>
+                                    <a href="{{ path('app.admin.project.construct', {'project': project.id}) }}">{{ project.name }}</a>
                                 {% endfor %}
                                 <br>
                             {% endfor %}
