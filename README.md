@@ -2,8 +2,22 @@
 
 http://project-management-symfony.herokuapp.com
 
-addmin credentials:  
-{admin: admin}  
+#### admin credentials:  
+{admin: admin} 
 
-task(russian):  
-https://www.notion.so/Symfony-3-4-30bc6b163b4840629ec78cc2fb8124d2
+## functions
+
+### admin:  
+- admin panel
+- managing users, projects, roles
+
+### roles:
+- specifying users' access to the projects
+
+### users:  
+- registration / authorization
+- reading/writing/deleting projects
+  
+
+task description (in russian):  
+https://www.notion.so/Project-management-system-f89249aee53a4ddea2c3d4d8f7ae1465
