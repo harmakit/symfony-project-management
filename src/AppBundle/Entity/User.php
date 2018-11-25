@@ -167,7 +167,7 @@ class User implements UserInterface
             foreach ($accesses as $access) {
                 $values = $access->getProjects()->getValues();
                 foreach ($values as $value) {
-                    if (!in_array($value, $projects)) {
+                    if (!in_array($value, $projects, true)) {
                         $projects[] = $value;
                     }
                 }

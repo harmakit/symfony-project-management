@@ -50,7 +50,7 @@ class WorkbenchController extends Controller
         $user = $this->getUser();
         $userProjects = $user->getProjectsByAccess();
 
-        if (!$this->isGranted('ROLE_ADMIN') && !in_array($project, $userProjects[Access::WRITE])) {
+        if (!$this->isGranted('ROLE_ADMIN') && !in_array($project, $userProjects[Access::WRITE], true)) {
             return $this->redirectToRoute('app.workbench.index');
         }
 
@@ -77,7 +77,7 @@ class WorkbenchController extends Controller
         $user = $this->getUser();
         $userProjects = $user->getProjectsByAccess();
 
-        if (!$this->isGranted('ROLE_ADMIN') && !in_array($project, $userProjects[Access::DELETE])) {
+        if (!$this->isGranted('ROLE_ADMIN') && !in_array($project, $userProjects[Access::DELETE], true)) {
             return $this->redirectToRoute('app.workbench.index');
         }
 

@@ -7,9 +7,9 @@ namespace AppBundle\Entity;
  */
 class Access
 {
-    const DELETE = 0;
-    const WRITE = 1;
-    const READ = 2;
+    public const DELETE = 0;
+    public const WRITE = 1;
+    public const READ = 2;
 
     /**
      * @var integer
